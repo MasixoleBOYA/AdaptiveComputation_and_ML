@@ -11,17 +11,26 @@ D = {((3, 1), 1),
 
 # parameters randomly assigned
 weights = [2,3.5]
-learningRate = 0.01
-threshold = -1
+learningRate:bool = 0.01
+threshold:int = -1
+
 # inupts and targets
-inputs = [i[0] for i in D]
-targets = [j[1] for j in D]
+inputs:list = [i[0] for i in D]
+targets:list = [j[1] for j in D]
 
 print(f"INPUTS: \n{inputs}")
 print(f"\nTARGETS: \n{targets}")
 
-def perceptronTrainingAlgorithm():
+def perceptronTrainingAlgorithm(tresholdValue: int, learningRateValue:int , weightValues: list, targetValues: list, inputValues:list):
+    summation = (inputValues[0]*weightValues[0])+(inputValues[1]*weightValues[1])
+    if summation>tresholdValue:
+        output = 1
+    elif summation < tresholdValue:
+        output = 0
+
+    return output       
     
+    updatedThreshold = tresholdValue - (learningRateValue*(output-trueValue))
 
 
 epoch = 0
