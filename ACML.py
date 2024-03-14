@@ -20,6 +20,7 @@ targets = [j[1] for j in D]
 print(f"INPUTS: \n{inputs}")
 print(f"\nTARGETS: \n{targets}")
 
+
 array_of_inputs = []
 targets =  []
 
