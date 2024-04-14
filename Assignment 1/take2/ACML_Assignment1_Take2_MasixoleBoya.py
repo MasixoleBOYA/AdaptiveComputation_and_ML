@@ -28,6 +28,8 @@ class NeuralNetwork:
         final_inputs = np.dot(hidden_outputs, self.weights_hidden_output) + self.bias_output
         final_outputs = self.sigmoid(final_inputs)
 
+        # print(f"\nFinal outputs: {final_outputs}")
+
         return final_outputs
     #the loss
     def sum_of_squares_loss(self, output_values, target_values):
@@ -59,21 +61,21 @@ class NeuralNetwork:
         self.weights_input_hidden += learning_rate * np.outer(input_list, hidden_deltas)
         self.bias_hidden += learning_rate * hidden_deltas
 
+#The actual code
 
-if __name__ == "__main__":
-    input_nodes = 4
-    hidden_nodes = 8
-    output_nodes = 3
+input_nodes = 4
+hidden_nodes = 8
+output_nodes = 3
 
-    #weights matrix
-    weights_from_InputToHidden = [[1, 1, 1, 1, 1, 1, 1, 1],
+#weights matrix
+weights_from_InputToHidden = [[1, 1, 1, 1, 1, 1, 1, 1],
                             [1, 1, 1, 1, 1, 1, 1, 1],
                             [1, 1, 1, 1, 1, 1, 1, 1],
                             [1, 1, 1, 1, 1, 1, 1, 1]]
 
-    bias_hidden = [1, 1, 1, 1, 1, 1, 1, 1]
+bias_hidden = [1, 1, 1, 1, 1, 1, 1, 1]
 
-    weights_from_HiddenToOutput = [[1, 1, 1],
+weights_from_HiddenToOutput = [[1, 1, 1],
                             [1, 1, 1],
                             [1, 1, 1],
                             [1, 1, 1],
@@ -82,31 +84,34 @@ if __name__ == "__main__":
                             [1, 1, 1],
                             [1, 1, 1]]
 
-    bias_output = [1, 1, 1]
-
-    # testing_input_list = [-2,1,0.5,-1,0,0,1]
-    testing_input_list = [1.4,0,-2.5,-3,0.4,0.6,0]
+bias_output = [1, 1, 1]
     
-    #an instance of the network
-    neural_network = NeuralNetwork(input_nodes, hidden_nodes, output_nodes, weights_from_InputToHidden, weights_from_HiddenToOutput, bias_hidden, bias_output)
+#an instance of the network
+neural_network = NeuralNetwork(input_nodes, hidden_nodes, output_nodes, weights_from_InputToHidden, weights_from_HiddenToOutput, bias_hidden, bias_output)
 
-    #Standard input
-    input_values = [testing_input_list[i] for i in range(4)]
-    target_values = [testing_input_list[i] for i in range(4, 7)]
+testing_input_list =[]
 
-    print(f"\nInputs values :\n{input_values}")
-    print(f"Target values :\n{target_values}")
+for i in range(1,8):
+    inputting = float(input())
+    testing_input_list.append(inputting)
 
-    #Feedforward the input values
-    output_values_before = neural_network.feedforward(input_values)
-    loss_before = neural_network.sum_of_squares_loss(output_values_before, target_values)
-    print("\nLoss before training:", round(loss_before, 4))
+#Standard input
+input_values = [testing_input_list[i] for i in range(4)]
+target_values = [testing_input_list[i] for i in range(4, 7)]
 
-    #One iteration of backpropagation
-    neural_network.backpropagation(input_values, target_values, learning_rate=0.1)
+#Feedforward the input values
+output_values_before = neural_network.feedforward(input_values)
+loss_before = neural_network.sum_of_squares_loss(output_values_before, target_values)
+print(round(loss_before, 4))
 
-    #Feedforward the input values again
-    output_values_after = neural_network.feedforward(input_values)
-    loss_after = neural_network.sum_of_squares_loss(output_values_after, target_values)
-    print("Loss after training:", round(loss_after, 4))
+#One iteration of backpropagation
+neural_network.backpropagation(input_values, target_values, learning_rate=0.1)
+
+#Feedforward the input values again
+output_values_after = neural_network.feedforward(input_values)
+loss_after = neural_network.sum_of_squares_loss(output_values_after, target_values)
+print(round(loss_after, 4))
    
+
+
+
